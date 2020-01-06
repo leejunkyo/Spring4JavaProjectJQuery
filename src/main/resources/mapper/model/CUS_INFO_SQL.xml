@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cusInfo">
+	<select id="selectCusInfo" parameterType="hashMap" resultType="sp4j.tbl.model.CUS_INFO">
+	
+	 <![CDATA[ 
+	 SELECT ID id
+	      , PW pw
+	      , USERNAME userName
+	   FROM CUS_INFO
+	  WHERE 1=1
+	  ]]>
+	  <if test="id != ''">
+	   AND ID = #{id}
+	  </if>
+	  <if test="pw != ''">
+	   AND PW = #{pw} 
+	  </if>   		 
+	</select>
+	<select id="selectCusInfoList" parameterType="hashMap" resultType="sp4j.tbl.model.CUS_INFO">
+	<![CDATA[ 
+	 SELECT ID id
+	      , PW pw
+	      , USERNAME userName
+	   FROM CUS_INFO
+	  WHERE 1 = 1
+	  ]]>
+	  <if test="id != ''">
+	   AND ID LIKE '%'||#{id} ||'%' 
+	  </if>
+	  <if test="userName != ''">
+	   AND USERNAME LIKE '%'||#{userName} ||'%' 
+	  </if>
+	</select>
+	<insert id="insertCusInfo" parameterType="hashMap">
+		<![CDATA[ 
+			INSERT INTO CUS_INFO(
+				 ID
+			   , PW
+			   , USERNAME
+			) VALUES (
+				#{id}
+			   ,#{pw}
+			   ,#{userName}	
+			
+			)
+		]]>
+	</insert>
+</mapper>
+

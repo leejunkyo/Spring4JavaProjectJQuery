@@ -19,8 +19,10 @@ public class sessionInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		
 		if (!"/jlp/loginPage.do".equals(request.getRequestURI().toString()) &&
-				!"/jlp/login.do".equals(request.getRequestURI().toString())
-
+				!"/jlp/login.do".equals(request.getRequestURI().toString()) &&
+				!"/jlp/join.do".equals(request.getRequestURI().toString()) &&
+				!"/server/firstVisit.do".equals(request.getRequestURI().toString()) 
+				
 		) {
 			if (session.getAttribute("loginVO") == null) {
 				log.debug(

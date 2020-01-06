@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <%@ include file="/WEB-INF/include/common.jspf"%>
 <title>로그인페이지</title>
-
 </head>
 <body>
 	<div class="login">
@@ -25,13 +23,26 @@
 </body>
 <script type="text/javascript">
 	var loginform = document.getElementById('login-page');
-
+	loginform.method = "POST";
+ 	var firstVisit = '${firstVisit}';
+	if(firstVisit == ""){
+		loginform.action = "/server/firstVisit.do";
+		loginform.submit();
+	} 
+	
+	var result = '${result}';
+	
+	if(result != ""){
+		Alert(result);
+	}
+	
 	function login() {
 		loginform.action = "/jlp/login.do";
 		loginform.submit();
 	}
 	function join() {
-
+		loginform.action = "/jlp/join.do";
+		loginform.submit();
 	}
 </script>
 </html>

@@ -1123,7 +1123,7 @@ body{font-family: 'NotoSans Light','Malgun Gothic','맑은 고딕','Apple SD Got
 .compop > .popHead{ height: 28px; background-color: #7bb8d3;  color: white; border-bottom: 1px solid #c7eeff;border-top-right-radius: 3px;border-top-left-radius: 3px;}
 .compop > .popHead > .headFont{  padding: 5px 0px 0px 8px; font-size: 13px;   font-weight: bold;}
 .compop > .alert{ width: 95%; height: 80%; margin: 7px 0px 0px 10px;}
-.compop > .alert > .alertFont{ height:65%; font-size: 16px; }
+.compop > .alert > .alertFont{ height:65%; font-size: 13px; }
 .compop > .alert > .alertBtn{ height:35%; }
 .mask {width:100%; height:100%; position:fixed; background:rgba(0,0,0,0.7) repeat; top:0; left:0; z-index:999; display:none;}
 
