@@ -6,13 +6,18 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import sp4j.common.dao.AbstractDAO;
+import sp4j.common.server.model.TableNm;
 
 @Repository("ServerDAO")
 public class ServerDAO extends AbstractDAO {
 
 	@SuppressWarnings("unchecked")
-	public List<Map<String,Object>> selectTblList() {
-		return (List<Map<String,Object>>) selectList("server.selectTblList", "");
+	public List<TableNm> selectTblList(Map<String,Object> commandMap) {
+		return (List<TableNm>) selectList("server.selectTblList", commandMap);
+	}
+	
+	public void exeQuery(Map<String,Object> commandMap) {
+		 insert("server.exeQuery", commandMap);
 	}
 	
 }

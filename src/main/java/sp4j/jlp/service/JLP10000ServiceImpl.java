@@ -6,17 +6,17 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import sp4j.tbl.dao.CUS_INFODAO;
-import sp4j.tbl.model.CUS_INFO;
+import sp4j.tbl.dao.CUCUIFDAO;
+import sp4j.tbl.model.CUCUIF;
 
 @Service("jlp10000Service")
 public class JLP10000ServiceImpl implements JLP10000Service{
 
 	@Resource(name="cusInfoDAO")
-	private CUS_INFODAO cusInfoDAO;
+	private CUCUIFDAO cusInfoDAO;
 	
 	@Override
-	public CUS_INFO selectCusInfo(Map<String, Object> map) {
+	public CUCUIF selectCusInfo(Map<String, Object> map) {
 		return cusInfoDAO.selectCusInfo(map);
 	}
 

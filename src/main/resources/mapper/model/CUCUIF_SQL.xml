@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cucuif">
+	<select id="selectCusInfo" parameterType="hashMap" resultType="sp4j.tbl.model.CUCUIF">
+	
+	 <![CDATA[ 
+	 SELECT CUS_ID  cusId
+	      , CUS_PWD cusPwd
+	      , CUS_NM  cusNm
+	   FROM CUCUIF
+	  WHERE 1=1
+	  ]]>
+	  <if test="cusId != ''">
+	   AND CUS_ID = #{cusId}
+	  </if>
+	  <if test="cusPwd != ''">
+	   AND CUS_PWD = #{cusPwd} 
+	  </if>   		 
+	</select>
+	<select id="selectCusInfoList" parameterType="hashMap" resultType="sp4j.tbl.model.CUCUIF">
+	<![CDATA[ 
+	 SELECT CUS_ID cusId
+	      , CUS_PWD cusPwd
+	      , CUS_NM cusNm
+	   FROM CUCUIF
+	  WHERE 1 = 1
+	  ]]>
+	  <if test="cusId != ''">
+	   AND CUS_ID LIKE '%'||#{cusId} ||'%' 
+	  </if>
+	  <if test="cusNm != ''">
+	   AND CUS_NM LIKE '%'||#{cusNm} ||'%' 
+	  </if>
+	</select>
+	<insert id="insertCusInfo" parameterType="hashMap">
+		<![CDATA[ 
+			INSERT INTO CUCUIF(
+				 CUS_ID
+			   , CUS_PWD
+			   , CUS_NM
+			) VALUES (
+				#{cusId}
+			   ,#{cusPwd}
+			   ,#{cusNm}	
+			
+			)
+		]]>
+	</insert>
+</mapper>
+

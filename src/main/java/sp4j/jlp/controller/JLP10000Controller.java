@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sp4j.common.model.CommandMap;
 import sp4j.jlp.service.JLP10000Service;
-import sp4j.tbl.model.CUS_INFO;
+import sp4j.tbl.model.CUCUIF;
 
 @Controller
 public class JLP10000Controller {
@@ -32,10 +32,10 @@ public class JLP10000Controller {
 	@RequestMapping(value = "/jlp/login.do")
 	public ModelAndView login(CommandMap commandMap,HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView("/jlp/JLP10000");
-		CUS_INFO cusInfo = jlp10000Service.selectCusInfo(commandMap.getMap());
+		CUCUIF cusInfo = jlp10000Service.selectCusInfo(commandMap.getMap());
 		if(cusInfo==null){
 			mv = new ModelAndView("/jlp/JLP10000");
-			mv.addObject("result", "°èÁ¤ Á¤º¸°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+			mv.addObject("result", "ì•„ì´ë”” ë¹„ë°€ë²ˆí˜¸ë¥¼ ì •í™•íˆ ì…ë ¥í•˜ì„¸ìš”.");
 		}else{
 			mv = new ModelAndView("/jmp/JMP10000");
 		}
@@ -44,25 +44,21 @@ public class JLP10000Controller {
 	}
 	@RequestMapping(value = "/jlp/join.do")
 	public ModelAndView join(CommandMap commandMap) throws Exception {
-		/**
-		 * CommandMap>> param : id , pw 
-		 * id, pw·Î select
-		 * 
-		 * */
+		
 		ModelAndView mv = new ModelAndView("/jlp/JLP10000");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("id",commandMap.getMap().get("id"));
-		map.put("pw","");
-		CUS_INFO cusInfo = jlp10000Service.selectCusInfo(map);
-		/**
-		 * ¾ÆÀÌµğ Á¸Àç°¡ ÇÏÁö ¾ÊÀ½*/
+		map.put("cusId",commandMap.getMap().get("cusId"));
+		map.put("cusPwd","");
+		CUCUIF cusInfo = jlp10000Service.selectCusInfo(map);
+		
 		if(cusInfo == null){
-			map.put("pw",commandMap.getMap().get("pw"));
-			map.put("userName","ÀÌÀºÁö");
+			map.put("cusPwd",commandMap.getMap().get("cusPwd"));
+			map.put("cusNm","ì•™ì‘ë””ì´ë§Œì§€ê³ ì‹¶ë‹¤");
+			mv.addObject("result", "ê°€ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤."); 
 			jlp10000Service.insertCusInfo(map);
 		}else{
-			mv.addObject("result", "ÀÌ¹Ì Á¸ÀçÇÏ´Â ¾ÆÀÌµğ ÀÔ´Ï´Ù."); 
+			mv.addObject("result", "ì¤‘ë³µëœ ì•„ì´ë””ê°€ ì¡´ì¬í•©ë‹ˆë‹¤."); 
 		}
 		return mv;
 	}

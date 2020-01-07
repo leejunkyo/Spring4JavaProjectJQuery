@@ -26,7 +26,7 @@ public class sessionInterceptor extends HandlerInterceptorAdapter {
 		) {
 			if (session.getAttribute("loginVO") == null) {
 				log.debug(
-						"====================================           ¸¸·áµÈ ¼¼¼Ç             =================================================");
+						"====================================           ì„¸ì…˜ë§Œë£Œ             =================================================");
 				response.sendRedirect("/jlp/loginPage.do");
 				return false;
 
