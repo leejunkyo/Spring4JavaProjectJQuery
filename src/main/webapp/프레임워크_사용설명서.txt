@@ -1,5 +1,11 @@
-데이터 베이스 설정
+(1) 데이터 베이스 설정
+#### 데이터베이스는 mariaDb , oracle만 지원  
 1. config.propertiesdp 자신의 디비에 맞는 정보를 선택후 입력한다. 
    #### server Info #### 부분의 server정보를 바꾸지 않으면 자동 테이블생성이 불가능하다.
 2. context-datasource.xml
    자신에 맞는 datasource를 사용한다 . 사용하지않는 datasource는 주석처리한다.
+   
+   
+   
+(2)톰켓서버설정
+1. 해당 메모장과 같이있는 server.xml (webapp/server.xml) 파일을 톰켓서버에 덮어 씌운다. 
