@@ -125,28 +125,8 @@ public class ServerController {
 		}
 		session.setAttribute("firstVisit", "N");
 		
-		ModelAndView mv = new ModelAndView("/jlp/JLP10000");
+		ModelAndView mv = new ModelAndView("/jcp/JCP10000");
 		return mv;
 	}
-	// 셀가져오
-    private static Object getValueFromCell(Cell cell) {
-        switch(cell.getCellType()) {
-            case STRING:
-                return cell.getStringCellValue();
-            case BOOLEAN:
-                return cell.getBooleanCellValue();
-            case NUMERIC:
-                if(DateUtil.isCellDateFormatted(cell)) {
-                    return cell.getDateCellValue();
-                }
-                return cell.getNumericCellValue();
-            case FORMULA:
-                return cell.getCellFormula();
-            case BLANK:
-                return "";
-            default:
-                return "";                                
-        }
-    }
 
 }

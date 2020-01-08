@@ -38,11 +38,11 @@
 	}
 	
 	function login() {
-		loginform.action = "/jlp/login.do";
+		loginform.action = "/jcp/login.do";
 		loginform.submit();
 	}
 	function join() {
-		loginform.action = "/jlp/join.do";
+		loginform.action = "/jcp/join.do";
 		loginform.submit();
 	}
 </script>

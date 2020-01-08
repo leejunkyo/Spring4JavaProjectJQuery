@@ -1,4 +1,4 @@
-package sp4j.jlp.service;
+package sp4j.jcp.service;
 
 import java.util.Map;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import sp4j.tbl.dao.CUCUIFDAO;
 import sp4j.tbl.model.CUCUIF;
 
-@Service("jlp10000Service")
-public class JLP10000ServiceImpl implements JLP10000Service{
+@Service("jcp10000Service")
+public class JCP10000ServiceImpl implements JCP10000Service{
 
 	@Resource(name="cusInfoDAO")
 	private CUCUIFDAO cusInfoDAO;
