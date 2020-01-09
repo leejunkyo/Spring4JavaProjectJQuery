@@ -52,8 +52,15 @@ public class sessionInterceptor extends HandlerInterceptorAdapter {
 				response.sendRedirect("/jcp/loginPage.do");
 				return false;
 
+			};
+		}else{
+			if (session.getAttribute("loginVO") != null) {
+				
+				response.sendRedirect("/jmp/openPage.do");
+				return false;
+				
 			}
-			;
+			
 		}
 
 		if (log.isDebugEnabled()) {

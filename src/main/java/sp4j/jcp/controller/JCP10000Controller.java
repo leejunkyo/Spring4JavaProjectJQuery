@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,13 +31,16 @@ public class JCP10000Controller {
 	}
 	
 	@RequestMapping(value = "/jcp/login.do")
-	public ModelAndView login(CommandMap commandMap,HttpServletRequest request) throws Exception {
+	public ModelAndView login(CommandMap commandMap,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView("/jcp/JCP10000");
+		
 		CUCUIF cusInfo = jcp10000Service.selectCusInfo(commandMap.getMap());
 		if(cusInfo==null){
 			mv.addObject("result", "아이디 비밀번호를 정확히 입력하세요.");
 		}else{
-			mv.setViewName("/jmp/JMP10000");
+			HttpSession session = request.getSession();
+			session.setAttribute("loginVO", cusInfo);
+			response.sendRedirect("/jmp/openPage.do");
 		}
 		
 		return mv;

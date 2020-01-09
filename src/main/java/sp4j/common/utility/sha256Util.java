@@ -4,8 +4,8 @@ import java.security.MessageDigest;
 
 import org.apache.commons.codec.binary.Base64;
 
-public class sha254Util {
-	public static String sha254Create(String password){
+public class sha256Util {
+	public static String sha256Create(String password){
 		
 		  try{
 		        MessageDigest digest = MessageDigest.getInstance("SHA-256");

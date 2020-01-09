@@ -25,6 +25,9 @@
 	var loginform = document.getElementById('login-page');
 	loginform.method = "POST";
 	
+	document.getElementById('cusId').value = '';
+	document.getElementById('cusPwd').value = '';
+	
  	var firstVisit = '${firstVisit}';
 	if(firstVisit == ""){
 		loginform.action = "/server/firstVisit.do";
@@ -34,14 +37,17 @@
 	var result = '${result}';
 	
 	if(result != ""){
+
 		Alert(result);
 	}
 	
 	function login() {
+		document.getElementById('cusPwd').value = SHA256(document.getElementById('cusPwd').value);
 		loginform.action = "/jcp/login.do";
 		loginform.submit();
 	}
 	function join() {
+		document.getElementById('cusPwd').value = SHA256(document.getElementById('cusPwd').value);
 		loginform.action = "/jcp/join.do";
 		loginform.submit();
 	}
