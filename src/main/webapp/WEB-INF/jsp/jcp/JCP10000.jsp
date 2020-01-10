@@ -14,8 +14,7 @@
 			<p>비밀번호(Password)</p>
 			<input class="textBox" type="password" id="cusPwd" name="cusPwd">
 			<div class="mt15 fr">
-				<button type="button" class="btn success wd100 ht31"
-					onclick="login()">로그인</button>
+				<button type="button" class="btn success wd100 ht31"onclick="login()">로그인</button>
 				<button type="button" class="btn cancel wd100 ht31" onclick="join()">회원가입</button>
 			</div>
 		</form>

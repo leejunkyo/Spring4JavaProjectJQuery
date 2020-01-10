@@ -65,4 +65,12 @@ public class JCP10000Controller {
 		}
 		return mv;
 	}
+	@RequestMapping(value = "/jcp/logOut.do")
+	public ModelAndView logOut(CommandMap commandMap,HttpServletRequest request, HttpServletResponse response) throws Exception {
+			ModelAndView mv = new ModelAndView("/jcp/JCP10000");
+			HttpSession session = request.getSession();
+			session.setAttribute("loginVO", null);
+		
+		return mv;
+	}
 }
