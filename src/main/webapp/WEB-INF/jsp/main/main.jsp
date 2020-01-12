@@ -5,21 +5,37 @@
 <head>
 <%@ include file="/WEB-INF/include/common.jspf"%>
 <script type="text/javascript">
-
+	
+	var tabCnt = 0;
+	
 	document.addEventListener("DOMContentLoaded", function(){
-		/** sidebar  */
-		$('.subMenu').click( function() {
-			$('.subMenu').find('ul').click( function() {
-				return false;
+		/* sidebar */
+		$(function () {
+			/** sidebar  */
+			$('.sidebar .subMenu').click( function() {
+				
+				$('.sidebar .subMenu').find('ul').click( function() {
+					return false;
+				});
+				
+				if($(this).find('ul').css('display') == 'block'){
+					$(this).find('ul').slideUp(500);
+				}else{
+					$(this).find('ul').slideDown(500);
+				}
 			});
-			if($(this).find('ul').css('display') == 'block'){
-				$(this).find('ul').slideUp(500);
-			}else{
-				$(this).find('ul').slideDown(500);
-			}
+			$('.sidebar .subMenu li').click( function() {
+				 var tabNm = $(this).find('a').text();
+				 var src   = $(this).find('a').attr('href');
+				 tabCreat(tabNm, src);
+			});
 		});
+		
+		
 		/** 정보입력  */
 		document.getElementById('cusNm').innerHTML = '${cusNm}';
+		
+	    
 	});
 	/** 뒤로가기 방지*/
 	history.pushState(null, null, location.href);
@@ -40,6 +56,42 @@
 		 });
 		
 	}
+	
+	/* tab Create*/
+    function tabCreat(tabNm, src){
+    	if($('ul.tabs li').length == 10){
+    		Alert("10개 이상의 화면을 생성할수 없습니다.");
+    		return;
+    	}
+    	src = '/sample/openSampleList.do';
+    	var tabName = '<li id="tabli'+tabCnt+'" rel="tab'+tabCnt+'"><div class="tabNm" onClick="tabClick(\'tabli'+tabCnt+'\');">'+tabNm+'</div><div class="tabIcon" onClick="tabDel(\'tabli'+tabCnt+'\');"><img class="tabCanImg"  src="../../image/common/cancel.png"/></div></li>';
+    	var ifrNm   = '<div id="tab'+tabCnt+'" class="tab_content"><iframe id="iframe" src="'+src+'"></iframe></div>';
+    	$('.content .tabs').append(tabName);
+    	$('.content .tab_container').append(ifrNm);
+    	tabClick('tabli'+tabCnt);
+    	tabCnt++;
+    };
+	
+	/* tab Click */
+	function tabClick(tabId){
+		$('ul.tabs li').removeClass('active').css('color', '#333');
+		$('#'+tabId).addClass('active').css('color', 'darkred');
+		$('.tab_content').hide()
+		var activeTab = $('#'+tabId).attr('rel');
+		$("#" + activeTab).fadeIn();
+		
+	}
+	
+	/* tab Del */  
+	function tabDel(tabId){
+		
+		 var activeTab = $('#'+tabId).attr("rel");
+		 $('#'+tabId).remove();
+		 $("#" + activeTab).remove();
+		 tabClick($("ul.tabs li:last-child").attr('id'))
+	}
+	
+	
 </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -92,7 +144,7 @@
 				<div class="subMenu"><a href="#">1</a>
 					<ul>
 						<li><a href="#">1-1</a></li>
-						<li><a href="#">1-2</a></li>
+						<li><a href="#">엄청나게긴화면명으로테스트를합시다.</a></li>
 						<li><a href="#">1-3</a></li>
 					</ul>
 				</div>
@@ -106,14 +158,11 @@
 			</div>
 		</div>
 		<div class="content">
-			<h2>Sidebar</h2>
-			<ul>
-				<li>Lorem</li>
-				<li>Ipsum</li>
-				<li>Dolor</li>
-			</ul>
-		</div>
-
+			<ul class="tabs">
+		    </ul>
+		    <div class="tab_container">
+		    </div>
+	   </div>
 	</div>
 </body>
 </html>
