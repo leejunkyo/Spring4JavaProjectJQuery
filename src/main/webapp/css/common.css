@@ -1166,8 +1166,8 @@ nav {width: 100%; }
 .container .sidebar a{ text-decoration: none;  color: #39484d;}
 .container .sidebar ul{background: #fff;margin:0;list-style:none; padding: 0;text-align: center;border-bottom: 1px solid #bcbcbc; display:none;}
 /* content */
-.container .content{ width: 86%; height:100% ;float: right;}
-.container .content ul.tabs {margin: 0; padding: 0;float: left; list-style: none; height: 32px; border-bottom: 1px solid #eee; border-left: 1px solid #eee;  width: 100%; font-family:"dotum"; font-size:12px;}
+.container .content{ width: 86%; height:99% ;float: right;}
+.container .content ul.tabs {margin: 0; padding: 0;float: left; list-style: none; border-bottom: 1px solid #eee; border-left: 1px solid #eee;  width: 97%; font-family:"dotum"; font-size:12px;}
 .container .content ul.tabs li { float: left; text-align:center;cursor: pointer; min-width:82px; height: 31px; line-height: 31px; border: 1px solid #eee; border-left: none; font-weight: bold; background: #fafafa; overflow: hidden; position: relative;}
 .container .content ul.tabs li.active { background: #FFFFFF; border-bottom: 1px solid #FFFFFF;}
 .container .content .tab_container { border: 1px solid #eee; border-top: none; clear: both; float: left; width: 248px; background: #FFFFFF;width: 97%; height: 93.5%;}
