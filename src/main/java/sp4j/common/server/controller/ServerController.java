@@ -97,7 +97,7 @@ public class ServerController {
 						
 						if(server.equals("oracle")){
 							log.debug("============================                 ORACLE COMMANT CREATE       ============================= ");
-							filePath = path+"/dataBaseFile/"+server+"/comment/"+chkTable+"_Create.xlsx";
+							filePath =  path+"/dataBaseFile/"+server+"/comment/"+chkTable+"_Create.xlsx";
 							inputStream = new FileInputStream(filePath);
 							
 							Workbook workbook2 = WorkbookFactory.create(inputStream);
@@ -113,6 +113,22 @@ public class ServerController {
 									commandMap.put("query", cell2);
 									serverService.exeQuery(commandMap.getMap());
 								}
+							}
+						}
+						filePath = path+"/dataBaseFile/data/"+chkTable.toLowerCase()+"_data.xlsx";
+						inputStream = new FileInputStream(filePath);
+						Workbook workbook3 = WorkbookFactory.create(inputStream);
+						Sheet sheet3 = workbook3.getSheetAt(0);
+						Iterator<Row> rowItr3 = sheet3.iterator();
+						while (rowItr3.hasNext()) {
+							Row row2 = rowItr3.next();
+
+							Iterator<Cell> cellItr3 = row2.cellIterator();
+							while (cellItr3.hasNext()) {
+								Cell cell3 = cellItr3.next(); 
+								
+								commandMap.put("query", cell3);
+								serverService.exeQuery(commandMap.getMap());
 							}
 						}
 						log.debug("============================                 DB TABLE CREATE  END        ============================= ");
