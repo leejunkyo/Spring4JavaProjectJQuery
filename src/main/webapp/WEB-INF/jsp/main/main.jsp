@@ -5,43 +5,140 @@
 <head>
 <%@ include file="/WEB-INF/include/common.jspf"%>
 <script type="text/javascript">
-	
-	var tabCnt = 0;
-	
+/** 뒤로가기 방지*/
+history.pushState(null, null, location.href);
+	window.onpopstate = function () {
+	    history.go(1);
+	};
+	var id = 0;
 	document.addEventListener("DOMContentLoaded", function(){
-		/* sidebar */
+		_ajaxGET(
+				 '/jmp/menuList.do'
+				,''
+				,function success(data){
+					 
+					 var vData = data.cumnifList;
+					 var vHtml = '';
+					 
+					 //상단메뉴바
+					 for(var idx = 0; idx < vData.length; idx++){
+						 var dData = vData[idx];
+						 var menuId = dData.menuId;
+						 var menuWidth = dData.menuPgNm.byteLength()*7;
+						 if(menuWidth < 80){
+							 menuWidth = 80;
+						 }
+						 if(menuId.length == 2){
+							 if(idx != 0){
+								 vHtml += '</ul></li>';
+							 }
+							 vHtml += '<li class="mainMenu"><a onclick=upMenuClick("lv1","'+dData.menuPgId+'") title="'+dData.menuPgNm+'">'+dData.menuPgNm+'</a><ul>'
+						 }
+						 if(menuId.length == 4){
+							 if(idx != 1){
+								 vHtml += '</ul></li>';
+							 }
+							 vHtml += '<li><a class="subMenu" onclick=upMenuClick("lv2","'+dData.menuPgId+'") title="'+dData.menuPgNm+'">'+dData.menuPgNm+'</a><ul>';
+						 }
+						 if(menuId.length == 6){
+							 vHtml += '<li onclick=upMenuClick("lv3","'+dData.menuPgId+'") ref="'+dData.menuPgUrl+'"><a class="subMenu wd'+menuWidth+'" ref="'+dData.menuPgId+'" title="'+dData.menuPgNm+'">'+dData.menuPgNm+'</a></li>'
+						 }
+						 if((parseInt(idx)+1) == vData.length){
+							 vHtml += '</ul></li></ul></li>'
+						 }
+					 }
+					 document.getElementById('upMenu').innerHTML = vHtml;
+					 
+					 //사이드메뉴바
+					 vHtml = "";
+					 
+					 for(var idx = 0; idx < vData.length; idx++){
+						 
+						 var dData = vData[idx];
+						 var menuId = dData.menuId;
+						 if(idx == 0){
+							 vHtml += '<div id="'+dData.menuPgId+'" class="sideTab">';
+						 }
+						 
+						 if(menuId.length == 2){
+							 vHtml += '<div class="titMenu" id="'+dData.menuPgId+'">'+dData.menuPgNm+'</div>';
+						 }
+						 
+						 if(menuId.length == 4){
+							 if(idx != 1){
+								 vHtml += '</ul></div>';
+							 }
+							 vHtml += '<div class="subMenu"><a id="'+dData.menuPgId+'">'+dData.menuPgNm+'</a><ul>';
+						 }
+						 
+						 if(menuId.length == 6){
+							 vHtml += '<li ref="'+dData.menuPgUrl+'"><a id="'+dData.menuPgId+'">'+dData.menuPgNm+'</a></li>';
+						 }
+						 
+						 if((parseInt(idx)+1) == vData.length){
+							 vHtml += '</ul></div></div>';
+						 }
+					 }
+					 document.getElementById('sideMenu').innerHTML = vHtml;
+
+				 });
+		
 		$(function () {
+			
 			/** sidebar  */
 			$('.sidebar .subMenu').click( function() {
 				
 				$('.sidebar .subMenu').find('ul').click( function() {
 					return false;
 				});
-				
+
 				if($(this).find('ul').css('display') == 'block'){
-					$(this).find('ul').slideUp(500);
+					$(this).find('ul').slideUp(300);
 				}else{
-					$(this).find('ul').slideDown(500);
+					$(this).find('ul').slideDown(300);
 				}
+				
 			});
 			$('.sidebar .subMenu li').click( function() {
 				 var tabNm = $(this).find('a').text();
-				 var src   = $(this).find('a').attr('href');
-				 tabCreat(tabNm, src);
+				 var tabId = $(this).find('a').attr('id');
+				 var src   = $(this).attr('ref');
+				 tabCreat(tabNm, src ,tabId);
 			});
+			$('.sidebar .sideTab').first().css('display','block');
+			$('.sidebar .subMenu').first().find('ul').trigger('click');
 		});
 		
 		
 		/** 정보입력  */
 		document.getElementById('cusNm').innerHTML = '${cusNm}';
-		
 	    
 	});
-	/** 뒤로가기 방지*/
-	history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-        history.go(1);
-	};
+	
+	/** 상단메뉴 */
+	function upMenuClick(op,id){
+		
+		$('.sidebar .sideTab').css('display','none');
+		if(op == 'lv1'){
+			$('.sidebar #'+id).css('display','block');
+			
+		}else if(op == 'lv2'){
+			var tabId = $('#'+id);
+			tabId.parent().children( 'ul' ).css('display','block');
+			tabId.parent().parent().prop('style','display:block');
+			
+		}else if(op == 'lv3'){
+			var tabId = $('#'+id);
+			tabId.parent().parent().parent().parent().css('display','block');
+			var tabNm = tabId.text();
+			var src   = tabId.parent().attr('ref');
+			tabId.parent().parent().css('display','block');
+			tabCreat(tabNm, src , id);
+		}
+		
+	}
+
+	
 	/** 세션로그 아웃 */
 	function logOut(){
 		 Confirm("로그아웃 하시겟습니까?","알림",function succecc(flag){
@@ -58,24 +155,37 @@
 	}
 	
 	/* tab Create*/
-    function tabCreat(tabNm, src){
+    function tabCreat(tabNm, src , id){
     	if($('ul.tabs li').length == 10){
     		Alert("10개 이상의 화면을 생성할수 없습니다.");
     		return;
     	}
+    	var tabId = 'tabli'+id;
+    	var createFlag = false;
+    	$('ul.tabs li').each(function(){
+    		if($(this).attr('id') == tabId){
+    			tabClick(tabId);
+    			createFlag = true;
+    		};
+    	});
+    	
+    	if(createFlag){
+    		return;
+    	} 
+    	
     	src = '/sample/openSampleList.do';
-    	var tabName = '<li id="tabli'+tabCnt+'" rel="tab'+tabCnt+'"><div class="tabNm" onClick="tabClick(\'tabli'+tabCnt+'\');">'+tabNm+'</div><div class="tabIcon" onClick="tabDel(\'tabli'+tabCnt+'\');"><img class="tabCanImg"  src="../../image/common/cancel.png"/></div></li>';
-    	var ifrNm   = '<div id="tab'+tabCnt+'" class="tab_content"><iframe id="iframe" src="'+src+'"></iframe></div>';
+    	var tabName = '<li id="tabli'+id+'" rel="tab'+id+'"><div class="tabNm" onClick="tabClick(\'tabli'+id+'\');">'+tabNm+'</div><div class="tabIcon" onClick="tabDel(\'tabli'+id+'\');"><img class="tabCanImg"  src="../../image/common/cancel.png"/></div></li>';
+    	var ifrNm   = '<div id="tab'+id+'" class="tab_content"><iframe style="border: none;" id="iframe" src="'+src+'"></iframe></div>';
     	$('.content .tabs').append(tabName);
     	$('.content .tab_container').append(ifrNm);
-    	tabClick('tabli'+tabCnt);
-    	tabCnt++;
+    	tabClick('tabli'+id);
+    	
     };
 	
 	/* tab Click */
 	function tabClick(tabId){
 		$('ul.tabs li').removeClass('active').css('color', '#333');
-		$('#'+tabId).addClass('active').css('color', 'darkred');
+		$('#'+tabId).addClass('active').css('color', '#4597ff');
 		$('.tab_content').hide()
 		var activeTab = $('#'+tabId).attr('rel');
 		$("#" + activeTab).fadeIn();
@@ -104,31 +214,7 @@
 			<div class="sub">(Spring4Java)</div>
 		</div>
 		<nav class="listMenu">
-		<ul>
-			<li class="mainMenu"><a href="#Link" title="Link">Jquery</a>
-				<ul>
-					<li><a class="subMenu" href="#Link" title="Link">Link » </a>
-						<ul>
-							<li><a class="subMenu" href="#Link" title="Link">Link</a></li>
-							<li><a class="subMenu" href="#Link" title="Link">Link</a></li>
-						</ul>
-					</li>
-					<li><a class="subMenu" href="#Link" title="Link">Link » </a>
-						<ul>
-							<li><a class="subMenu" href="#Link" title="Link">Link</a></li>
-							<li><a class="subMenu" href="#link" title="Link">Link</a></li>
-							<li><a class="subMenu" href="#Link" title="Link">Link </a></li>
-						</ul>
-					</li>
-					<li><a class="subMenu" href="#Link" title="Link">Link » </a>
-						<ul>
-							<li><a class="subMenu" href="#Link" title="Link">Link</a></li>
-							<li><a class="subMenu" href="#Link" title="Link">Link</a></li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-		</ul>
+			<ul id="upMenu"></ul>
 		</nav>
 	</div>
 	<div class="loginInfo">
@@ -138,24 +224,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class="sidebar">
-			<div>
-				<div class="titMenu">Jquery</div>
-				<div class="subMenu"><a href="#">1</a>
-					<ul>
-						<li><a href="#">1-1</a></li>
-						<li><a href="#">엄청나게긴화면명으로테스트를합시다.</a></li>
-						<li><a href="#">1-3</a></li>
-					</ul>
-				</div>
-				<div class="subMenu"><a href="#">2</a>
-					<ul>
-						<li><a href="#">2-1</a></li>
-						<li><a href="#">2-2</a></li>
-						<li><a href="#">2-3</a></li>
-					</ul>
-				</div>
-			</div>
+		<div class="sidebar" id="sideMenu">
 		</div>
 		<div class="content">
 			<ul class="tabs">

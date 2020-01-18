@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
+<script src="/js/common/ajax.js"></script> <!-- ajax  -->
+<script src="/js/common/commonUtil.js"></script> <!-- ajax  -->
 <script src="/js/libs/sha256.min.js"></script> <!--sha256  -->
 <%@ include file="../jsp/common/compop.jsp" %> 

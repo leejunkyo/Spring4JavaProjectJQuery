@@ -8,7 +8,9 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 
 <configuration>
-	<settings>
-		<setting name="jdbcTypeForNull" value="NULL" />
-	</settings>
+    <settings>
+        <setting name="cacheEnabled" value="false" />
+        <setting name="jdbcTypeForNull" value="NULL" />
+        <setting name="callSettersOnNulls" value="true"/>
+    </settings>
 </configuration>

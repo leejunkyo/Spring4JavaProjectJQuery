@@ -14,7 +14,7 @@
 	  </if>
 	  <if test="cusPwd != ''">
 	   AND CUS_PWD = #{cusPwd} 
-	  </if>   		 
+	  </if>   		
 	</select>
 	<select id="selectCusInfoList" parameterType="hashMap" resultType="sp4j.tbl.model.CUCUIF">
 	<![CDATA[ 

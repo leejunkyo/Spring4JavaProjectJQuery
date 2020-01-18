@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cucuif">
+	<select id="selectCumnif" parameterType="hashMap" resultType="sp4j.tbl.model.CUMNIF">
+	
+	 <![CDATA[ 
+		SELECT MENU_ID     menuId
+		     , MENU_PG_ID  menuPgId
+		     , MENU_PG_NM  menuPgNm
+		     , MENU_PG_URL menuPgUrl
+		  FROM CUMNIF
+	    WHERE 1=1	     
+	  ]]>
+	  <if test="menuId != ''">
+	   AND MENU_ID = #{menuId}
+	  </if>
+	  ORDER BY MENU_ID 
+	</select>
+	<select id="selectCumnifList" parameterType="hashMap" resultType="sp4j.tbl.model.CUMNIF">
+	<![CDATA[ 
+		SELECT MENU_ID     menuId
+		     , MENU_PG_ID  menuPgId
+		     , MENU_PG_NM  menuPgNm
+		     , MENU_PG_URL menuPgUrl
+		  FROM CUMNIF
+	    WHERE 1=1	
+	  ]]>
+	  <if test="menuId != ''">
+	   AND MENU_ID LIKE '%'||#{menuId} ||'%' 
+	  </if>
+	  ORDER BY MENU_ID 
+	</select>
+	<insert id="insertCumnif" parameterType="hashMap">
+		<![CDATA[ 
+			INSERT INTO CUMNIF(
+				 MENU_ID
+			   , MENU_PG_ID
+			   , MENU_PG_NM
+			   , MENU_PG_URL
+			) VALUES (
+				#{menuId}
+			   ,#{menuPgId}
+			   ,#{menuPgNm}	
+			   ,#{menuPgUrl}	
+			)
+		]]>
+	</insert>
+</mapper>
+

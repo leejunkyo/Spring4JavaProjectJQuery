@@ -361,6 +361,11 @@ body {overflow-x:hidden ;margin:0px; width:100%; height: 100vh;font-family: 'Not
 .wd348{ width:348px !important; }
 .wd349{ width:349px !important; }
 .wd350{ width:350px !important; }
+.wd351{ width:351px !important; }
+.wd352{ width:352px !important; }
+.wd353{ width:353px !important; }
+.wd354{ width:354px !important; }
+.wd355{ width:355px !important; }
 
 /* height */
 .ht1{ height:1px !important; }
@@ -1148,7 +1153,7 @@ nav {width: 100%; }
 .listMenu ul ul { border :1px solid #d5d5d5; height: auto; display: none;  position: absolute;  top: 100%;  min-width: 100px;}
 .listMenu ul li:hover > ul { display: block;}
 .listMenu ul ul > li { position: relative;}
-.listMenu ul ul > li a {  padding: 5px 15px;  height: auto;  background: #fff; }
+.listMenu ul ul > li a {  padding: 5px 15px;  background: #fff; }
 .listMenu ul ul > li a:hover {  background: #f3f3f3;}
 .listMenu ul ul ul {  position: absolute;  left: 100%;  top: 0;}
 .tit_logo{float:left;  margin: 4px;text-align: center;}
@@ -1161,13 +1166,14 @@ nav {width: 100%; }
 
 /* sidebar */
 .container .sidebar{background: #f1f1f1;line-height:2; height:100% ;width: 12%; float: left;  border: 1px solid #bcbcbc; border-radius: 3px;}
-.container .sidebar .titMenu{text-align: center; font-size: 30px;  background: #4597ff;  color: #fff;  height: 68px;  line-height: 63px;  border-radius: 2px;}
-.container .sidebar .subMenu{text-align: center; cursor: Pointer; }
+.container .sidebar .sideTab{display:none;}
+.container .sidebar .sideTab .titMenu{text-align: center; font-size: 20px;  background: #4597ff;  color: #fff;  height: 68px;  line-height: 68px;  border-radius: 2px;}
+.container .sidebar .sideTab .subMenu{text-align: center; cursor: Pointer; }
 .container .sidebar a{ text-decoration: none;  color: #39484d;}
 .container .sidebar ul{background: #fff;margin:0;list-style:none; padding: 0;text-align: center;border-bottom: 1px solid #bcbcbc; display:none;}
 /* content */
 .container .content{ width: 86%; height:99% ;float: right;}
-.container .content ul.tabs {margin: 0; padding: 0;float: left; list-style: none; border-bottom: 1px solid #eee; border-left: 1px solid #eee;  width: 97%; font-family:"dotum"; font-size:12px;}
+.container .content ul.tabs {min-height: 33px;margin: 0; padding: 0;float: left; list-style: none; border-bottom: 1px solid #4597ff; border-left: 1px solid #eee;  width: 97%; font-family:"dotum"; font-size:12px;}
 .container .content ul.tabs li { float: left; text-align:center;cursor: pointer; min-width:82px; height: 31px; line-height: 31px; border: 1px solid #eee; border-left: none; font-weight: bold; background: #fafafa; overflow: hidden; position: relative;}
 .container .content ul.tabs li.active { background: #FFFFFF; border-bottom: 1px solid #FFFFFF;}
 .container .content .tab_container { border: 1px solid #eee; border-top: none; clear: both; float: left; width: 248px; background: #FFFFFF;width: 97%; height: 93.5%;}
