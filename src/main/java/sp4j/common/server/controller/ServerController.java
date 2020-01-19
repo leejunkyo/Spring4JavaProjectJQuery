@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -40,7 +39,6 @@ public class ServerController {
 
 	protected Log log = LogFactory.getLog(sessionInterceptor.class);
 	
-	@Transactional
 	@RequestMapping(value = "/server/firstVisit.do")
 	public ModelAndView firstVisit(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();

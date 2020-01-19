@@ -6,18 +6,29 @@
 <title>로그인페이지</title>
 </head>
 <body>
-	<div class="login">
-		<form id="login-page" class="page">
-			<h3>로그인</h3>
-			<p>아이디(ID)</p>
-			<input class="textBox" type="text" id="cusId" name="cusId">
-			<p>비밀번호(Password)</p>
-			<input class="textBox" type="password" id="cusPwd" name="cusPwd">
-			<div class="mt15 fr">
-				<button type="button" class="btn success wd100 ht31"onclick="login()">로그인</button>
-				<button type="button" class="btn cancel wd100 ht31" onclick="join()">회원가입</button>
+	<div class="loginContainer">
+		<div class="login">
+			<div class="header">
+				<span class="info">Login</span>
+				<div class="prompt">
+					<span class="ask">Don't have account?</span>
+					<button class="btn success wd75 ht29" onClick="join();">sign up</button>
+				</div>
 			</div>
-		</form>
+			<div class="main">
+				<div class="user_field">
+					<form class="details" autocomplete="off" id="login-page">
+						<div class="mt20">
+							<input type="text" placeholder="Id" id="cusId" name="cusId" />
+						</div>
+						<div class="mt20">
+							<input type="password" id="cusPwd" name="cusPwd" placeholder="Password" autocomplete="new-password"/>
+						</div>
+					</form>
+				</div>
+			</div>
+			<button class="btn success wd70 ht30 fr mr18" onClick="login();">Login</button>
+		</div>
 	</div>
 </body>
 <script type="text/javascript">
@@ -36,7 +47,6 @@
 	var result = '${result}';
 	
 	if(result != ""){
-
 		Alert(result);
 	}
 	
@@ -46,9 +56,20 @@
 		loginform.submit();
 	}
 	function join() {
-		document.getElementById('cusPwd').value = SHA256(document.getElementById('cusPwd').value);
-		loginform.action = "/jcp/join.do";
-		loginform.submit();
+		
+		LayerPop({
+			viewNm : '회원가입'  ,
+			width  : 400       ,
+			height : 300       ,
+			url    : '/jcp/jcp10100/openPage.do',
+			param  : {}       
+			
+		});
+		
+		
 	}
+	/* document.getElementById('cusPwd').value = SHA256(document.getElementById('cusPwd').value);
+	loginform.action = "/jcp/join.do";
+	loginform.submit(); */
 </script>
 </html>

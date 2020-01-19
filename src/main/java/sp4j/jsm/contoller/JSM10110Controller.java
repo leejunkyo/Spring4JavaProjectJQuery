@@ -1,4 +1,4 @@
-package sp4j.jsp.contoller;
+package sp4j.jsm.contoller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

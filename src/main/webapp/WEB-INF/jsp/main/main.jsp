@@ -175,7 +175,7 @@ history.pushState(null, null, location.href);
     	
     	//src = '/sample/openSampleList.do';
     	var tabName = '<li id="tabli'+id+'" rel="tab'+id+'"><div class="tabNm" onClick="tabClick(\'tabli'+id+'\');">'+tabNm+'</div><div class="tabIcon" onClick="tabDel(\'tabli'+id+'\');"><img class="tabCanImg"  src="../../image/common/cancel.png"/></div></li>';
-    	var ifrNm   = '<div id="tab'+id+'" class="tab_content"><iframe style="border: none;" id="iframe" src="'+src+'"></iframe></div>';
+    	var ifrNm   = '<div id="tab'+id+'" class="tab_content"><iframe style="border: none;" id="iframe'+id+'" src="'+src+'" ref="'+tabNm+'"></iframe></div>';
     	$('.content .tabs').append(tabName);
     	$('.content .tab_container').append(ifrNm);
     	tabClick('tabli'+id);

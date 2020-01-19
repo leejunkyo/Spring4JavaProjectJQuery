@@ -45,26 +45,7 @@ public class JCP10000Controller {
 		
 		return mv;
 	}
-	@RequestMapping(value = "/jcp/join.do")
-	public ModelAndView join(CommandMap commandMap) throws Exception {
-		
-		ModelAndView mv = new ModelAndView("/jcp/JCP10000");
-		Map<String, Object> map = new HashMap<String, Object>();
-		
-		map.put("cusId",commandMap.getMap().get("cusId"));
-		map.put("cusPwd","");
-		CUCUIF cusInfo = jcp10000Service.selectCusInfo(map);
-		
-		if(cusInfo == null){
-			map.put("cusPwd",commandMap.getMap().get("cusPwd"));
-			map.put("cusNm","앙응디이만지고싶다");
-			mv.addObject("result", "가입이 완료되었습니다."); 
-			jcp10000Service.insertCusInfo(map);
-		}else{
-			mv.addObject("result", "중복된 아이디가 존재합니다."); 
-		}
-		return mv;
-	}
+
 	@RequestMapping(value = "/jcp/logOut.do")
 	public ModelAndView logOut(CommandMap commandMap,HttpServletRequest request, HttpServletResponse response) throws Exception {
 			ModelAndView mv = new ModelAndView("/jcp/JCP10000");
