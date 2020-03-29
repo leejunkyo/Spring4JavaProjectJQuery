@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import sp4j.jsm.dao.JSM10110DAO;
-import sp4j.jsm.model.JSM10110;
 
 @Service("jsm10110Service")
 public class JSM10110ServiceImpl implements JSM10110Service{
@@ -17,7 +16,9 @@ public class JSM10110ServiceImpl implements JSM10110Service{
 	private JSM10110DAO jsm10110DAO;
 
 	@Override
-	public List<JSM10110> selectJSM10110List(Map<String, Object> map) {
-		return jsm10110DAO.selectJSM10110List(map);
+	public List<Map<String, Object>> chatList(Map<String,Object> map) {
+		// TODO Auto-generated method stub
+		return jsm10110DAO.chatList(map);
 	}
+
 }

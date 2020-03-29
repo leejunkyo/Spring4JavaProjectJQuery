@@ -15,5 +15,10 @@ public class JSM10110DAO extends AbstractDAO {
 	public List<JSM10110> selectJSM10110List(Map<String, Object> map) {
 		return (List<JSM10110>) selectList("jsm10110.jsm10110List", map);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String, Object>> chatList(Map<String,Object> map) {
+		return (List<Map<String, Object>>) selectList("jsm10110.chatList", map);
+	}
 
 }

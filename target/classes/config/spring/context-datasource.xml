@@ -12,20 +12,20 @@
 		location="classpath:/config/sessionUrl.properties" />
 
 	<!-- oracle -->
-<!-- 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
+ 	<bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url" value="#{config['db.url']}" />
 		<property name="username" value="#{config['db.username']}" />
 		<property name="password" value="#{config['db.password']}" />
-	</bean> -->
+	</bean>
 
 	<!-- mariaDB -->
-	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" 
+	<!-- <bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.SimpleDriverDataSource" 
 		> <property name="driverClass" value="org.mariadb.jdbc.Driver"></property> 
 		<property name="url" value="#{config['db.url']}"></property> <property name="username" 
 		value="#{config['db.username']}"></property> <property name="password" value="#{config['db.password']}"></property> 
-		</bean>
-
+	</bean>
+ -->
 	<!-- logger -->
 	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
 		<constructor-arg ref="dataSourceSpied" />

@@ -12,16 +12,16 @@ import sp4j.tbl.model.CUMNIF;
 public class CUMNIFDAO extends AbstractDAO {
 
 	public CUMNIF selectCumnif(Map<String, Object> map) {
-		return (CUMNIF) selectOne("cucuif.selectCumnif", map);
+		return (CUMNIF) selectOne("cumnif.selectCumnif", map);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<CUMNIF> selectCumnifList(Map<String, Object> map) {
-		return (List<CUMNIF>) selectList("cucuif.selectCumnifList", map);
+		return (List<CUMNIF>) selectList("cumnif.selectCumnifList", map);
 	}
 
 	public void insertCumnif(Map<String, Object> map) {
-		insert("cucuif.insertCumnif", map);
+		insert("cumnif.insertCumnif", map);
 	}
 
 }
